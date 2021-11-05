@@ -4,6 +4,7 @@ spring:
     name: root
     password: root
     url: jdbc:mysql://192.168.113.129/gulimall_ums?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false&rewriteBatchedStatements=true
+    username: xujunyang
 
 #配置mapper.xml的路径
 mybatis-plus:
