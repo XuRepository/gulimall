@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +27,15 @@ import com.atguigu.common.utils.R;
  * @date 2021-11-05 10:54:28
  */
 @RestController
+@RefreshScope//自动刷新配置，每次运行时都要向配置中心请求最新的配置
 @RequestMapping("coupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
+    @Value("${coupon.user.name}")
+    private String name;
+    @Value("${coupon.user.age}")
+    private String age;
 
     /**
      * 列表
@@ -38,6 +45,25 @@ public class CouponController {
         PageUtils page = couponService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    @RequestMapping("/test")
+    public R test(){
+        System.out.println(name);
+        System.out.println(age);
+        return R.ok().put("name",name).put("age",age);
+    }
+
+    /**
+     * 个人测试
+     * @return
+     */
+    @RequestMapping("/member/list")
+    public R memberCoupons(){
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setCouponName("满100-10");
+        return R.ok().put("coupons",Arrays.asList(couponEntity));
+
     }
 
 

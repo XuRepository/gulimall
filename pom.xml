@@ -19,12 +19,13 @@
         <module>renren-fast</module>
         <module>renren-generator</module>
         <module>gulimall-common</module>
+        <module>gulimall-gateway</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
 
-            <!--spring boot 2.2.2-->
+            <!--spring boot 2.1.8-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
