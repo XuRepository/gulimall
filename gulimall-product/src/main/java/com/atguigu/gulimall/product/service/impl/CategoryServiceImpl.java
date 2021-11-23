@@ -1,6 +1,8 @@
 package com.atguigu.gulimall.product.service.impl;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -24,6 +26,17 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<CategoryEntity> listWithRree() {
+        //1，查出所有分类
+        //baseMapper相当于传统的xxxDAO，这里mybatisPlus已经通过
+        // ServiceImpl<CategoryDao, CategoryEntity>的父类对xxxDao封装为baseMapper
+        List<CategoryEntity> categoryEntities = baseMapper.selectList(null);
+
+        //2，组成父子树形结构
+        return categoryEntities;
     }
 
 }

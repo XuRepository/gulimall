@@ -1,6 +1,7 @@
 package com.atguigu.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +32,26 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
-     * 列表
+     * 树状形式展现出查询的数据
      */
-    @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = categoryService.queryPage(params);
+    @RequestMapping("/list/tree")
+    public R list(){
 
-        return R.ok().put("page", page);
+
+        List<CategoryEntity> entities =categoryService.listWithRree();
+
+        return R.ok().put("page",entities);
     }
+
+//    /**
+//     * 列表
+//     */
+//    @RequestMapping("/list")
+//    public R list(@RequestParam Map<String, Object> params){
+//        PageUtils page = categoryService.queryPage(params);
+//
+//        return R.ok().put("page", page);
+//    }
 
 
     /**
